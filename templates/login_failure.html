@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+      }
+      th, td {
+        padding: 5px;
+        text-align: left;
+      }
+      h2, h3, h4, form {
+        text-align:center;
+        vertical-align: middle;
+      }
+      strong {
+        color: red;
+      }
+    </style>
+  </head>
+
+  <body>
+    <br />
+    <br />
+    <h3>Login<br/><strong>Invalid username/password! Try again</strong></h3>
+    <form action="{{ url_for('login_result') }}" method="post">
+      <p>Username: {{ form.username }}<br/>
+       Password:{{ form.password }}</p>
+      {{ form.login_button }}
+      {{ form.csrf_token }}
+    </form>
+
+    {% if attempts is iterable %}
+      <h4>Previous Attempts</h4>
+      <table style="width:35%">
+        <tr>
+          <th>Username</th>
+          <th>Password</th>
+        </tr>
+        {% for attempt in attempts %}
+          <tr>
+            <td>{{ attempt.username }}</td>
+            <td>{{ attempt.password }}</td>
+          </tr>
+        {% endfor %}
+      </table>
+    {% endif %}
+  </body>
+</html>
