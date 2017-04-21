@@ -136,6 +136,8 @@ def set_user(username):
         passwd_file.write(CONFIG[username]['password'])
     with open(CONFIG[APP_NAME][USERNM_FILE_KEY], 'w+') as usernm_file:
         usernm_file.write(username)
+    APP.logger.info("SETTING - Username: {} Password: {}"\
+                    .format(username, CONFIG[username]['password']))
     return redirect(url_for('admin'))
 
 def parse_configuration(config_path):
